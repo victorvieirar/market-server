@@ -4,30 +4,30 @@ var ObjectId = mongoose.Schema.Types.ObjectId;
 var userSchema = new mongoose.Schema({
   email: {
     type: String,
-    required: true
+    required: true,
   },
   password: {
     type: String,
-    required: true
+    required: true,
   },
   cpf: {
     type: String,
-    required: true
+    required: true,
   },
   name: {
     type: String,
-    required: true
+    required: true,
   },
   addresses: [
     {
-      type: ObjectId
-    }
+      type: ObjectId,
+    },
   ],
   orders: [
     {
-      type: ObjectID
-    }
-  ]
+      type: ObjectId,
+    },
+  ],
 });
 
 var User = (module.exports = mongoose.model("User", userSchema));

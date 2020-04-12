@@ -4,7 +4,7 @@ const router = express.Router();
 router.get("/", (req, res, next) => {
   res.status(200).send({
     title: "API",
-    message: "API Working fine"
+    message: "API Working fine",
   });
 });
 
@@ -26,10 +26,7 @@ router
   .put(addressController.update)
   .delete(addressController.delete);
 
-router
-  .route("/aisle")
-  .get(aisleController.index)
-  .post(aisleController.new);
+router.route("/aisle").get(aisleController.index).post(aisleController.new);
 
 router
   .route("/aisle/:aisle_id")
@@ -37,10 +34,7 @@ router
   .put(aisleController.update)
   .delete(aisleController.delete);
 
-router
-  .route("/order")
-  .get(orderController.index)
-  .post(orderController.new);
+router.route("/order").get(orderController.index).post(orderController.new);
 
 router
   .route("/order/:order_id")
@@ -70,10 +64,7 @@ router
   .put(subcategoryController.update)
   .delete(subcategoryController.delete);
 
-router
-  .route("/user")
-  .get(userController.index)
-  .post(userController.new);
+router.route("/user").get(userController.index).post(userController.new);
 
 router
   .route("/user/:user_id")
