@@ -93,7 +93,7 @@ exports.delete = (req, res) => {
   Order.deleteOne({ _id: req.params.order_id }, (err, order) => {
     if (err) res.status(400).send(err);
     else {
-      req.io.emit("ORDER_DELETED", { order: order });
+      req.io.emit("ORDER_DELETED", { _id: req.params.order_id });
       res.json({ _id: req.params.order_id });
     }
   });

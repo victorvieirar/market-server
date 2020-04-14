@@ -77,7 +77,7 @@ exports.delete = (req, res) => {
   Product.deleteOne({ _id: req.params.product_id }, (err, product) => {
     if (err) res.status(400).send(err);
     else {
-      req.io.emit("PRODUCT_DELETED", { product: product });
+      req.io.emit("PRODUCT_DELETED", { _id: req.params.product_id });
       res.json({ _id: req.params.product_id });
     }
   });

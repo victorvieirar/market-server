@@ -65,7 +65,7 @@ exports.delete = (req, res) => {
     (err, subcategory) => {
       if (err) res.status(400).send(err);
       else {
-        req.io.emit("SUBCATEGORY_DELETED", { subcategory: subcategory });
+        req.io.emit("SUBCATEGORY_DELETED", { _id: req.params.subcategory_id });
         res.json({ _id: req.params.subcategory_id });
       }
     }

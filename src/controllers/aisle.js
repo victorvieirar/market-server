@@ -53,7 +53,7 @@ exports.delete = (req, res) => {
   Aisle.deleteOne({ _id: req.params.aisle_id }, (err, aisle) => {
     if (err) res.status(400).send(err);
     else {
-      req.io.emit("AISLE_DELETED", { aisle: aisle });
+      req.io.emit("AISLE_DELETED", { _id: req.params.aisle_id });
       res.json({ _id: req.params.aisle_id });
     }
   });
