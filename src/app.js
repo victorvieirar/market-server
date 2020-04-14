@@ -1,4 +1,5 @@
 const express = require("express");
+const multer = require("multer");
 const mongoose = require("mongoose");
 const bodyParser = require("body-parser");
 
@@ -19,6 +20,15 @@ app.use((req, res, next) => {
 });
 
 app.server = server;
+
+// uploads
+const upload = multer({
+  dest: "../files",
+});
+
+app.post("/file", upload.single("file"), (req, res) => {
+  res.json({ file: req.file });
+});
 
 app.use((req, res, next) => {
   res.header("Access-Control-Allow-Origin", "*");
@@ -42,7 +52,7 @@ mongoose
     () => {
       console.log(`Database connection successful`);
     },
-    err => {
+    (err) => {
       console.log(`Error when conecting to the database. Err: ${err}`);
     }
   );
