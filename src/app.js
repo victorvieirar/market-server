@@ -21,15 +21,6 @@ app.use((req, res, next) => {
 
 app.server = server;
 
-// uploads
-const upload = multer({
-  dest: "../files",
-});
-
-app.post("/file", upload.single("file"), (req, res) => {
-  res.json({ file: req.file });
-});
-
 app.use((req, res, next) => {
   res.header("Access-Control-Allow-Origin", "*");
   res.header(
@@ -56,6 +47,30 @@ mongoose
       console.log(`Error when conecting to the database. Err: ${err}`);
     }
   );
+
+// uploads
+const storage = multer.diskStorage({
+  destination: (req, file, cb) => {
+    cb(null, "./files");
+  },
+  filename: (req, file, cb) => {
+    const uniqueSuffix =
+      Date.now() +
+      "-" +
+      Math.round(Math.random() * 1e9) +
+      `.${file.mimetype.split("/")[1]}`;
+    cb(null, uniqueSuffix);
+  },
+});
+
+const upload = multer({
+  storage,
+});
+
+app.post("/api/file", upload.single("file"), (req, res) => {
+  console.log(`uploading image to server... ${req.file}`);
+  res.json({ file: req.file });
+});
 
 app.use("/api", api);
 module.exports = app;
